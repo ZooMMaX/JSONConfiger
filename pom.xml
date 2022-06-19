@@ -8,7 +8,7 @@
     <artifactId>JSONConfiger</artifactId>
     <version>1.0</version>
     <name>JSONConfiger</name>
-    <description>Create and read config files with JSON</description>
+    <description>Create and read configs with JSON</description>
     <url>https://github.com/ZooMMaX/JSONConfiger</url>
 
     <licenses>
@@ -163,6 +163,21 @@
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20220320</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20220320</version>
+        </dependency>
+        <dependency>
+            <groupId>org.encog</groupId>
+            <artifactId>encog-core</artifactId>
+            <version>3.4</version>
         </dependency>
     </dependencies>
 </project>
