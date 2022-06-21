@@ -11,7 +11,10 @@ public enum ControlChars {
 
     @Getter
     private char ch;
+    @Getter
+    private String sch;
     ControlChars(char ch) {
         this.ch = ch;
+        this.sch = Character.toString(ch);
     }
 }

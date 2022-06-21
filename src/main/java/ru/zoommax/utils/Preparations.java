@@ -11,7 +11,16 @@ class Preparations {
     }
 
     public String replaceSpace(String s){
-        return s.replace(": ", ":").replace(" :", ":").replace(", ", ",").replace(" ,", ",");
+        s =  s.replace(": ", ":").replace(" :", ":").replace(", ", ",").replace(" ,", ",");
+        return s.replaceAll("(?<=\\{)([\\s]{2,})", "")
+                .replaceAll("(?<=\\[)([\\s]{2,})", "")
+                .replaceAll("(?<=\\])([\\s]{2,})", "")
+                .replaceAll("(?<=\\})([\\s]{2,})", "")
+                .replaceAll("(?<=,)([\\s]{2,})(?=\")", "")
+                .replaceAll("(?<=,)([\\s]{2,})(?=\\{)", "")
+                .replaceAll("(?<=,)([\\s]{2,})(?=\\[)", "")
+                .replaceAll("(?<=,)([\\s]{2,})(?=\\})", "")
+                .replaceAll("(?<=,)([\\s]{2,})(?=\\])", "");
     }
 
     String replaceTags(String s, String r){
@@ -50,21 +59,29 @@ class Preparations {
     }
 
     public String replaceCommaInArray(String json){
-        //replace comma to 0x0E62 where a comma is a pair separator
         char separator = ControlChars.COMMAINARRAY.getCh();
         char arrayStart = '[';
         char endArray = ']';
+        char startQuote = ControlChars.STARTQUOTE.getCh();
+        char endQuote = ControlChars.ENDQUOTE.getCh();
         boolean need = false;
+        boolean need2 = true;
         StringBuilder sb = new StringBuilder();
         for (int x = 0; x < json.length(); x++){
             char j = json.charAt(x);
             if (j == arrayStart){
                 need = true;
             }
+            if (j == startQuote){
+                need2 = false;
+            }
+            if (j == endQuote){
+                need2 = true;
+            }
             if (j == endArray){
                 need = false;
             }
-            if (need){
+            if (need&&need2){
                 if (j == ',') {
                     sb.append(separator);
                 }else {
@@ -82,8 +99,6 @@ class Preparations {
         char separator = ControlChars.COMMA.getCh();
         char startQuote = ControlChars.STARTQUOTE.getCh();
         char endQuote = ControlChars.ENDQUOTE.getCh();
-        char arrayStart = '[';
-        char endArray = ']';
         boolean need = true;
         StringBuilder sb = new StringBuilder();
         for (int x = 0; x < json.length(); x++){
