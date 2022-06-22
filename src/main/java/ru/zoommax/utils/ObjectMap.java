@@ -11,6 +11,9 @@ public class ObjectMap {
     private List<String> keys;
     @Getter
     @Setter
+    private String json;
+    @Getter
+    @Setter
     private String key;
     @Getter
     @Setter
@@ -49,6 +52,8 @@ public class ObjectMap {
         objectMap.setKey(key);
         objectMap.setType(type);
         switch (type){
+            case (byte) 0x01:
+                objectMap.setJson((String) o);
             case (byte) 0x02:
                 objectMap.setStringObj((String) o);
                 break;
